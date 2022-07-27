@@ -8,13 +8,19 @@
   </head>
   <body>
     <script>
-      function solution(arr) {
-        let answer = Math.min(...arr);
+      const solution = (string) => {
+        let answer;
+        let num = string.length / 2;
+        if (string.length % 2 === 1) {
+          answer = string.substring(num, num + 1);
+        } else {
+          answer = string.substring(num - 1, num + 1);
+        }
         return answer;
-      }
+      };
 
-      let arr = [5, 7, 1, 3, 2, 9, 11];
-      console.log(solution(arr));
+      let string = 'stuuuuuudy';
+      console.log(solution(string));
     </script>
   </body>
 </html>
