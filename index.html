@@ -8,21 +8,43 @@
   </head>
   <body>
     <script>
-      const solution = (a) => {
-        let n = a.length;
-        let answer = Array.from({ length: n }, () => 1);
-        for (let i = 0; i < n; i++) {
-          for (let j = 0; j < n; j++) {
-            if (a[i] > a[j]) {
-              answer[i]++;
+      const solution = (arr) => {
+        let answer = Number.MIN_SAFE_INTEGER;
+        let sumXY = 0;
+        let sumXYR = 0;
+        for (let i = 0; i < arr.length; i++) {
+          let sumX = arr[i].reduce((a, b) => a + b, 0);
+          if (answer < sumX) answer = sumX;
+
+          let sumY = 0;
+          for (let j = 0; j < arr.length; j++) {
+            sumY += arr[j][i];
+            if (answer < sumY) {
+              answer = sumY;
             }
+          }
+
+          sumXY += arr[i][i];
+          if (answer < sumXY) {
+            answer = sumXY;
+          }
+
+          sumXYR += arr[i][4 - i];
+          if (answer < sumXYR) {
+            answer = sumXYR;
           }
         }
         return answer;
       };
 
-      let a = [87, 89, 92, 100, 76];
-      console.log(solution(a));
+      let arr = [
+        [10, 13, 10, 12, 15],
+        [12, 39, 30, 23, 11],
+        [11, 25, 50, 53, 15],
+        [19, 27, 29, 37, 27],
+        [19, 13, 30, 13, 19],
+      ];
+      console.log(solution(arr));
     </script>
   </body>
 </html>
