@@ -8,43 +8,15 @@
   </head>
   <body>
     <script>
-      const solution = (arr) => {
-        let answer = Number.MIN_SAFE_INTEGER;
-        let sumXY = 0;
-        let sumXYR = 0;
-        for (let i = 0; i < arr.length; i++) {
-          let sumX = arr[i].reduce((a, b) => a + b, 0);
-          if (answer < sumX) answer = sumX;
-
-          let sumY = 0;
-          for (let j = 0; j < arr.length; j++) {
-            sumY += arr[j][i];
-            if (answer < sumY) {
-              answer = sumY;
-            }
-          }
-
-          sumXY += arr[i][i];
-          if (answer < sumXY) {
-            answer = sumXY;
-          }
-
-          sumXYR += arr[i][4 - i];
-          if (answer < sumXYR) {
-            answer = sumXYR;
-          }
-        }
+      function solution(s) {
+        let answer = 'YES';
+        s = s.toLowerCase().replace(/[^a-z]/g, '');
+        if (s.split('').reverse().join('') !== s) return 'NO';
         return answer;
-      };
+      }
 
-      let arr = [
-        [10, 13, 10, 12, 15],
-        [12, 39, 30, 23, 11],
-        [11, 25, 50, 53, 15],
-        [19, 27, 29, 37, 27],
-        [19, 13, 30, 13, 19],
-      ];
-      console.log(solution(arr));
+      let str = 'found7, time: study; Yduts; emit, 7Dnuof';
+      console.log(solution(str));
     </script>
   </body>
 </html>
