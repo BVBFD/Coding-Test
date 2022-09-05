@@ -8,15 +8,36 @@
   </head>
   <body>
     <script>
-      function solution(s) {
-        let answer = 'YES';
-        s = s.toLowerCase().replace(/[^a-z]/g, '');
-        if (s.split('').reverse().join('') !== s) return 'NO';
-        return answer;
+      function solution(str, t) {
+        let indexArr = [];
+        for (let i = 0; i < str.length; i++) {
+          if (str[i] === t) {
+            indexArr.push(i);
+          }
+        }
+
+        let answerArr = [];
+        for (let i = 0; i < str.length; i++) {
+          let answer = [];
+          indexArr.forEach((n) => {
+            answer.push(Math.abs(n - i));
+          });
+
+          let min = Number.MAX_SAFE_INTEGER;
+          answer.forEach((n) => {
+            if (min > n) {
+              min = n;
+            }
+          });
+          answerArr.push(min);
+        }
+
+        return answerArr;
       }
 
-      let str = 'found7, time: study; Yduts; emit, 7Dnuof';
-      console.log(solution(str));
+      let str = 'teachermode';
+      let t = 'e';
+      console.log(solution(str, t));
     </script>
   </body>
 </html>
