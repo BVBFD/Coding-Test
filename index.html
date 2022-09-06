@@ -8,36 +8,24 @@
   </head>
   <body>
     <script>
-      function solution(str, t) {
-        let indexArr = [];
+      function solution(str) {
+        let answer = '';
+        let cnt = 1;
         for (let i = 0; i < str.length; i++) {
-          if (str[i] === t) {
-            indexArr.push(i);
+          console.log(str[i]);
+          if (str[i] === str[i + 1]) {
+            cnt++;
+          } else {
+            answer += str[i];
+            if (cnt > 1) answer += String(cnt);
+            cnt = 1;
           }
         }
-
-        let answerArr = [];
-        for (let i = 0; i < str.length; i++) {
-          let answer = [];
-          indexArr.forEach((n) => {
-            answer.push(Math.abs(n - i));
-          });
-
-          let min = Number.MAX_SAFE_INTEGER;
-          answer.forEach((n) => {
-            if (min > n) {
-              min = n;
-            }
-          });
-          answerArr.push(min);
-        }
-
-        return answerArr;
+        return answer;
       }
 
-      let str = 'teachermode';
-      let t = 'e';
-      console.log(solution(str, t));
+      let str = 'KKHSSSSSSSE';
+      console.log(solution(str));
     </script>
   </body>
 </html>
