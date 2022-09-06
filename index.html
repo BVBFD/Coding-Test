@@ -8,24 +8,51 @@
   </head>
   <body>
     <script>
-      function solution(str) {
-        let answer = '';
-        let cnt = 1;
-        for (let i = 0; i < str.length; i++) {
-          console.log(str[i]);
-          if (str[i] === str[i + 1]) {
-            cnt++;
-          } else {
-            answer += str[i];
-            if (cnt > 1) answer += String(cnt);
-            cnt = 1;
+      const isPrime = (num) => {
+        if (num <= 1) {
+          // '1' 이하의 수눈 소수가 아닙니다.
+          return false;
+        }
+
+        if (num % 2 === 0) {
+          // '2'는 짝수 중에 유일한 소수이며,
+          // 짝수는 '2'를 공통적으로 약수로 가지기 때문에 소수가 아닙니다.
+          return num === 2 ? true : false;
+        }
+
+        for (let i = 3; i <= Math.sqrt(num); i += 2) {
+          // 자기 자신을 약수로 가지기 때문에 자기 자신의 수 제곱근까지 for문을 돌리고,
+          // 왜냐하면 소수는 자기자신을 약수로 가지기 때문,
+          // 모든 짝수는 2를 공통적으로 약수로 가지기 때문 소수가 아님.
+          // 고로 +2 씩 올라감.
+          if (num % i === 0) {
+            return false;
+          }
+          // 자기 자신의 수 제곱근까지 반복문 돌리면서 약수가 발견되면 false 반환
+        }
+
+        return true;
+        // 위의 제약사항이 없다면 true 반환
+      };
+
+      function solution(arr, n) {
+        let answerArr = [];
+
+        for (let i = 0; i < arr.length; i++) {
+          const reversed = parseInt(
+            arr[i].toString().split('').reverse().join('')
+          );
+
+          if (isPrime(reversed)) {
+            answerArr.push(reversed);
           }
         }
-        return answer;
+        return answerArr;
       }
 
-      let str = 'KKHSSSSSSSE';
-      console.log(solution(str));
+      let arr = [32, 55, 62, 20, 250, 370, 200, 30, 100];
+      let n = 9;
+      console.log(solution(arr, n));
     </script>
   </body>
 </html>
