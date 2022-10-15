@@ -9,20 +9,20 @@
   <body>
     <script>
       function solution(arr) {
-        const answer = 'YES';
+        let answer;
         let stack = [];
         for (x of arr) {
-          if (x === '(') {
-            stack.push(x);
+          if (x === ')') {
+            while (stack.pop() !== '(');
           } else {
-            stack.pop();
+            stack.push(x);
           }
         }
-        if (stack.length !== 0) return 'NO';
+        answer = stack.join('');
         return answer;
       }
 
-      let arr = '(()(()))(()';
+      let arr = '(A(BC)D)EF(G(H)(IJ)K)LM(N)';
       console.log(solution(arr));
     </script>
   </body>
