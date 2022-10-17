@@ -8,39 +8,43 @@
   </head>
   <body>
     <script>
-      function solution(board, moves) {
-        let answer = 0;
-        const stack = [];
-        for (x of moves) {
-          for (let i = 0; i < board.length; i++) {
-            if (board[i][x - 1] !== 0) {
-              stack.push(board[i][x - 1]);
-              board[i][x - 1] = 0;
-              break;
-            } else {
-              continue;
-            }
-          }
-          if (stack[stack.length - 1] === stack[stack.length - 2]) {
-            stack.pop();
-            answer++;
-            stack.pop();
-            answer++;
+      function solution(s) {
+        let answer;
+        let stack = [];
+        let rt;
+        let lt;
+        for (x of s) {
+          if (x === '+') {
+            rt = stack.pop();
+            lt = stack.pop();
+            stack.push(lt + rt);
+          } else if (x === '*') {
+            rt = stack.pop();
+            lt = stack.pop();
+            stack.push(lt * rt);
+          } else if (x === '-') {
+            rt = stack.pop();
+            lt = stack.pop();
+            stack.push(lt - rt);
+          } else if (x === '/') {
+            rt = stack.pop();
+            lt = stack.pop();
+            stack.push(lt / rt);
+          } else if (x === '%') {
+            rt = stack.pop();
+            lt = stack.pop();
+            stack.push(lt % rt);
+          } else if (x === NaN) {
+            continue;
+          } else {
+            stack.push(parseInt(x));
           }
         }
+        answer = stack.pop();
         return answer;
       }
-
-      let a = [
-        [0, 0, 0, 0, 0],
-        [0, 0, 1, 0, 3],
-        [0, 2, 5, 0, 1],
-        [4, 2, 4, 4, 2],
-        [3, 5, 1, 3, 1],
-      ];
-
-      let b = [1, 5, 3, 5, 1, 2, 1, 4];
-      console.log(solution(a, b));
+      let str = '352+*9-';
+      console.log(solution(str));
     </script>
   </body>
 </html>
