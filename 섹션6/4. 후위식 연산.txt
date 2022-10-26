@@ -49,41 +49,37 @@
 
 
 <script>
-      function solution(s) {
+      function solution(str) {
         let answer;
         let stack = [];
-        let rt;
-        let lt;
-        for (x of s) {
-          if (x === '+') {
-            rt = stack.pop();
-            lt = stack.pop();
-            stack.push(lt + rt);
-          } else if (x === '*') {
-            rt = stack.pop();
-            lt = stack.pop();
-            stack.push(lt * rt);
-          } else if (x === '-') {
-            rt = stack.pop();
-            lt = stack.pop();
-            stack.push(lt - rt);
-          } else if (x === '/') {
-            rt = stack.pop();
-            lt = stack.pop();
-            stack.push(lt / rt);
-          } else if (x === '%') {
-            rt = stack.pop();
-            lt = stack.pop();
-            stack.push(lt % rt);
-          } else if (x === NaN) {
-            continue;
+        for (x of str) {
+          let pX = parseInt(x);
+          if (isNaN(pX)) {
+            let rt = stack.pop();
+            let lt = stack.pop();
+            if (x === '+') {
+              answer = lt + rt;
+              stack.push(answer);
+            } else if (x === '-') {
+              answer = lt - rt;
+              stack.push(answer);
+            } else if (x === '*') {
+              answer = lt * rt;
+              stack.push(answer);
+            } else if (x === '/') {
+              answer = lt / rt;
+              stack.push(answer);
+            } else {
+              answer = lt % rt;
+              stack.push(answer);
+            }
           } else {
-            stack.push(parseInt(x));
+            stack.push(pX);
           }
         }
-        answer = stack.pop();
         return answer;
       }
+
       let str = '352+*9-';
       console.log(solution(str));
-</script>
+  </script>

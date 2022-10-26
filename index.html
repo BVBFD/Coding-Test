@@ -8,42 +8,30 @@
   </head>
   <body>
     <script>
-      function solution(s) {
-        let answer;
+      function solution(str) {
+        let answer = 0;
         let stack = [];
-        let rt;
-        let lt;
-        for (x of s) {
-          if (x === '+') {
-            rt = stack.pop();
-            lt = stack.pop();
-            stack.push(lt + rt);
-          } else if (x === '*') {
-            rt = stack.pop();
-            lt = stack.pop();
-            stack.push(lt * rt);
-          } else if (x === '-') {
-            rt = stack.pop();
-            lt = stack.pop();
-            stack.push(lt - rt);
-          } else if (x === '/') {
-            rt = stack.pop();
-            lt = stack.pop();
-            stack.push(lt / rt);
-          } else if (x === '%') {
-            rt = stack.pop();
-            lt = stack.pop();
-            stack.push(lt % rt);
-          } else if (x === NaN) {
-            continue;
+
+        for (let i = 0; i < str.length; i++) {
+          if (str[i] === ')') {
+            if (stack[stack.length - 1] === '(' && str[i - 1] === '(') {
+              stack.pop();
+              answer += stack.length;
+            } else if (stack[stack.length - 1] === '(' && str[i - 1] === ')') {
+              stack.pop();
+              answer++;
+            } else {
+              stack.push(str[i]);
+            }
           } else {
-            stack.push(parseInt(x));
+            stack.push(str[i]);
           }
         }
-        answer = stack.pop();
+
         return answer;
       }
-      let str = '352+*9-';
+
+      let str = '(((()(()()))(())()))(()())';
       console.log(solution(str));
     </script>
   </body>
