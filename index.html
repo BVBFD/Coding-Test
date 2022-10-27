@@ -8,31 +8,27 @@
   </head>
   <body>
     <script>
-      function solution(str) {
-        let answer = 0;
-        let stack = [];
-
-        for (let i = 0; i < str.length; i++) {
-          if (str[i] === ')') {
-            if (stack[stack.length - 1] === '(' && str[i - 1] === '(') {
-              stack.pop();
-              answer += stack.length;
-            } else if (stack[stack.length - 1] === '(' && str[i - 1] === ')') {
-              stack.pop();
-              answer++;
+      function solution(n, course) {
+        let need = Array.from(n);
+        let answer = 'YES';
+        for (x of course) {
+          if (need.includes(x)) {
+            if (need[0] === x) {
+              need.shift(x);
             } else {
-              stack.push(str[i]);
+              return (answer = 'NO');
             }
           } else {
-            stack.push(str[i]);
+            continue;
           }
         }
 
         return answer;
       }
 
-      let str = '(((()(()()))(())()))(()())';
-      console.log(solution(str));
+      let need = 'CBA';
+      let course = 'CBDAGE';
+      console.log(solution(need, course));
     </script>
   </body>
 </html>
