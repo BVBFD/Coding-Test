@@ -8,27 +8,24 @@
   </head>
   <body>
     <script>
-      function solution(n, course) {
-        let need = Array.from(n);
-        let answer = 'YES';
-        for (x of course) {
-          if (need.includes(x)) {
-            if (need[0] === x) {
-              need.shift(x);
+      function solution(array) {
+        let arr = array;
+        for (let i = 0; i < arr.length; i++) {
+          let jIndex = i;
+          for (let j = i + 1; j < arr.length; j++) {
+            if (arr[j] < arr[jIndex]) {
+              jIndex = j;
             } else {
-              return (answer = 'NO');
+              continue;
             }
-          } else {
-            continue;
           }
+          [arr[i], arr[jIndex]] = [arr[jIndex], arr[i]];
         }
-
-        return answer;
+        return arr;
       }
 
-      let need = 'CBA';
-      let course = 'CBDAGE';
-      console.log(solution(need, course));
+      let array = [13, 5, 11, 7, 23, 15];
+      console.log(solution(array));
     </script>
   </body>
 </html>
