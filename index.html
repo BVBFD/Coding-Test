@@ -9,19 +9,15 @@
   <body>
     <script>
       function solution(array) {
-        let arr = array;
-        for (let i = 0; i < arr.length; i++) {
-          let jIndex = i;
-          for (let j = i + 1; j < arr.length; j++) {
-            if (arr[j] < arr[jIndex]) {
-              jIndex = j;
-            } else {
-              continue;
+        let answer = array;
+        for (let i = 0; i < array.length; i++) {
+          for (let j = 0; j < array.length - i - 1; j++) {
+            if (array[j] > array[j + 1]) {
+              [array[j], array[j + 1]] = [array[j + 1], array[j]];
             }
           }
-          [arr[i], arr[jIndex]] = [arr[jIndex], arr[i]];
         }
-        return arr;
+        return answer;
       }
 
       let array = [13, 5, 11, 7, 23, 15];
