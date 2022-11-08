@@ -8,21 +8,30 @@
   </head>
   <body>
     <script>
-      function solution(array) {
-        let answer = array;
-        for (let i = 0; i < array.length; i++) {
-          let tmp = array[i];
-          let j;
-          for (j = i - 1; j >= 0; j--) {
-            if (array[j] > tmp) array[j + 1] = array[j];
-            else break;
+      function solution(arr) {
+        let answer = [];
+        for (let i = 0; i < arr.length; i++) {
+          if (answer.includes(arr[i])) {
+            answer.splice(
+              answer.findIndex((num) => num === arr[i]),
+              1
+            );
+            answer.unshift(arr[i]);
+          } else {
+            answer.unshift(arr[i]);
           }
-          array[j + 1] = tmp;
+
+          if (answer.length > 5) {
+            answer.pop();
+          } else {
+            continue;
+          }
         }
+
         return answer;
       }
 
-      let array = [11, 7, 5, 6, 10, 9];
+      let array = [1, 2, 3, 2, 6, 2, 3, 5, 7];
       console.log(solution(array));
     </script>
   </body>
