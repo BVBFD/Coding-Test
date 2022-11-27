@@ -10,6 +10,7 @@
     <script>
       function solution(target, arr) {
         let answer;
+<<<<<<< HEAD
         array.sort((a, b) => a - b);
         console.log(array);
         let lt = 0;
@@ -20,6 +21,18 @@
             answer = mid + 1;
             break;
           } else if (array[mid] > target) {
+=======
+        arr.sort((a, b) => a - b);
+        console.log(arr);
+        let lt = 0;
+        let rt = arr.length - 1;
+        while (lt <= rt) {
+          let mid = parseInt((lt + rt) / 2);
+          if (arr[mid] === target) {
+            answer = mid + 1;
+            break;
+          } else if (arr[mid] > target) {
+>>>>>>> 82a91f3a842497802a4b5bec38f6d47902da64b3
             rt = mid - 1;
           } else {
             lt = mid + 1;
