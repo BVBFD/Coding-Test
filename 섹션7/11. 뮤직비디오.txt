@@ -25,7 +25,6 @@ DVD를 가급적 줄이려고 한다. 고민 끝에 지니레코드는 M개의 D
 ▣ 출력예제 1
 17
 
-
 <html>
     <head>
         <meta charset="UTF-8">

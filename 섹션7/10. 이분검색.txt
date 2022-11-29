@@ -18,10 +18,6 @@
 ▣ 출력예제 1
 3
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 82a91f3a842497802a4b5bec38f6d47902da64b3
 <html>
     <head>
         <meta charset="UTF-8">
