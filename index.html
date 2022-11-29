@@ -8,18 +8,28 @@
   </head>
   <body>
     <script>
-      function solution(target, arr) {
+      function count(songs, mid) {
+        let cnt = 1;
+        let sum = 0;
+        for (let x of songs) {
+          if (sum + x > mid) {
+            cnt++;
+            sum = x;
+          } else {
+            sum += x;
+          }
+        }
+        return cnt;
+      }
+
+      function solution(target, songs) {
         let answer;
-        array.sort((a, b) => a - b);
-        console.log(array);
-        let lt = 0;
-        let rt = array.length - 1;
+        let lt = Math.max(...songs);
+        let rt = songs.reduce((a, b) => a + b, 0);
         while (lt <= rt) {
           let mid = parseInt((lt + rt) / 2);
-          if (array[mid] === target) {
-            answer = mid + 1;
-            break;
-          } else if (array[mid] > target) {
+          if (count(songs, mid) <= target) {
+            answer = mid;
             rt = mid - 1;
           } else {
             lt = mid + 1;
@@ -28,8 +38,8 @@
         return answer;
       }
 
-      let array = [23, 87, 65, 12, 57, 32, 99, 81];
-      console.log(solution(32, array));
+      let array = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      console.log(solution(3, array));
     </script>
   </body>
 </html>
