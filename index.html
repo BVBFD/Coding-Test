@@ -8,37 +8,40 @@
   </head>
   <body>
     <script>
-      function count(songs, mid) {
+      function count(barns, mid) {
         let cnt = 1;
-        let sum = 0;
-        for (let x of songs) {
-          if (sum + x > mid) {
+        let ep = barns[0];
+        for (let i = 1; i < barns.length; i++) {
+          if (barns[i] - ep >= mid) {
             cnt++;
-            sum = x;
-          } else {
-            sum += x;
+            ep = barns[i];
           }
         }
         return cnt;
       }
 
-      function solution(target, songs) {
+      function solution(target, barns) {
         let answer;
-        let lt = Math.max(...songs);
-        let rt = songs.reduce((a, b) => a + b, 0);
+        barns.sort((a, b) => a - b);
+        console.log(barns);
+        let lt = 1;
+        let rt = barns[barns.length - 1];
+
         while (lt <= rt) {
           let mid = parseInt((lt + rt) / 2);
-          if (count(songs, mid) <= target) {
+          if (count(barns, mid) >= target) {
             answer = mid;
-            rt = mid - 1;
+            lt = mid + 1;
           } else {
-            continue;
+            rt = mid - 1;
           }
         }
+
         return answer;
       }
 
-      let array = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      let array = [1, 2, 8, 4, 9];
+      // 1,2,4,8,9
       console.log(solution(3, array));
     </script>
   </body>
