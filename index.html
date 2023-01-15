@@ -8,24 +8,25 @@
   </head>
   <body>
     <script>
-      function solution(c, arr) {
+      function solution(lm, ps, pt) {
         let answer = Number.MIN_SAFE_INTEGER;
-        let n = arr.length;
-        function DFS(L, sum) {
-          if (sum > c) return;
+        let n = ps.length;
+        function DFS(L, sum, time) {
+          if (time > lm) return;
           if (L === n) {
             answer = Math.max(answer, sum);
           } else {
-            DFS(L + 1, sum + arr[L]);
-            DFS(L + 1, sum);
+            DFS(L + 1, sum + ps[L], time + pt[L]);
+            DFS(L + 1, sum, time);
           }
         }
-        DFS(0, 0);
+        DFS(0, 0, 0);
         return answer;
       }
 
-      let arr = [81, 58, 42, 33, 61];
-      console.log(solution(259, arr));
+      let ps = [5, 10, 25, 15, 6, 7];
+      let pt = [20, 5, 12, 8, 3, 4];
+      console.log(solution(20, ps, pt));
     </script>
   </body>
 </html>
