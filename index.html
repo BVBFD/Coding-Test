@@ -8,25 +8,30 @@
   </head>
   <body>
     <script>
-      function solution(lm, ps, pt) {
-        let answer = Number.MIN_SAFE_INTEGER;
-        let n = ps.length;
-        function DFS(L, sum, time) {
-          if (time > lm) return;
-          if (L === n) {
-            answer = Math.max(answer, sum);
+      function solution(n, m) {
+        let answer = [];
+        let tmp = Array.from({ length: m }, () => 0);
+        function DFS(L) {
+          if (L === m) {
+            answer.push(tmp.slice());
           } else {
-            DFS(L + 1, sum + ps[L], time + pt[L]);
-            DFS(L + 1, sum, time);
+            for (let i = 1; i <= n; i++) {
+              tmp[L] = i;
+              DFS(L + 1);
+            }
           }
         }
-        DFS(0, 0, 0);
+        DFS(0);
         return answer;
+
+        // for (let i = 1 ; i <= n ; i++) {
+        //   for (let j = 1 ; j <= n ; j++) {
+        //     console.log(i, j);
+        //   }
+        // }
       }
 
-      let ps = [5, 10, 25, 15, 6, 7];
-      let pt = [20, 5, 12, 8, 3, 4];
-      console.log(solution(20, ps, pt));
+      console.log(solution(3, 2));
     </script>
   </body>
 </html>
