@@ -8,30 +8,29 @@
   </head>
   <body>
     <script>
-      function solution(n, m) {
-        let answer = [];
-        let tmp = Array.from({ length: m }, () => 0);
-        function DFS(L) {
-          if (L === m) {
-            answer.push(tmp.slice());
+      function solution(m, arr) {
+        let answer = Number.MAX_SAFE_INTEGER;
+        let n = arr.length;
+        function DFS(L, sum) {
+          if (sum > m) return;
+          if (L >= answer) return;
+          if (sum === m) {
+            answer = Math.min(answer, L);
           } else {
-            for (let i = 1; i <= n; i++) {
-              tmp[L] = i;
-              DFS(L + 1);
+            for (let i = 0; i < n; i++) {
+              DFS(L + 1, sum + arr[i]);
             }
+            // DFS(L + 1, sum + arr[0]);
+            // DFS(L + 1, sum + arr[1]);
+            // DFS(L + 1, sum + arr[2]);
           }
         }
-        DFS(0);
+        DFS(0, 0);
         return answer;
-
-        // for (let i = 1 ; i <= n ; i++) {
-        //   for (let j = 1 ; j <= n ; j++) {
-        //     console.log(i, j);
-        //   }
-        // }
       }
 
-      console.log(solution(3, 2));
+      let arr = [1, 2, 5];
+      console.log(solution(15, arr));
     </script>
   </body>
 </html>
