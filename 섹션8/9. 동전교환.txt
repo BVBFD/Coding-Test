@@ -40,6 +40,9 @@
                         for(let i=0; i<n; i++){
                             DFS(L+1, sum+arr[i]);
                         }
+                        // DFS(L + 1, sum + arr[0]);
+                        // DFS(L + 1, sum + arr[1]);
+                        // DFS(L + 1, sum + arr[2]);
                     }
                 }
                 DFS(0, 0);
