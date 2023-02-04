@@ -8,17 +8,21 @@
   </head>
   <body>
     <script>
-      function solution(n) {
-        let answer;
-        function DFS(mn) {
-          if (mn === 1) return 1;
-          else return mn * DFS(mn - 1);
+      function solution(n, r) {
+        let answer = 0;
+        let dy = Array.from(Array(n + 1), () => Array(r + 1).fill(0));
+        // 3행 5열 다이나믹 테이블 배열 만들기
+        console.log(dy);
+        function DFS(n, r) {
+          if (dy[n][r] > 0) return dy[n][r];
+          if (n === r || r === 0) return 1;
+          else return (dy[n][r] = DFS(n - 1, r - 1) + DFS(n - 1, r));
         }
-        answer = DFS(n);
+        answer = DFS(n, r);
         return answer;
       }
 
-      console.log(solution(5));
+      console.log(solution(33, 19));
     </script>
   </body>
 </html>
