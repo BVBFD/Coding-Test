@@ -1,16 +1,27 @@
-function solution(n) {
-  function DFS(L) {
-    if (L == 0) {
-      return;
+function solution(m, arr) {
+  let answer = [];
+  let n = arr.length;
+  let tmp = Array.from({ length: m }, () => 0);
+  let ch = Array.from({ length: n }, () => 0);
+
+  function DFS(depth) {
+    if (depth === m) {
+      answer.push(tmp.slice());
     } else {
-      // 스택에 하나 하나 쌓이기 전에 실행
-      DFS(L - 1);
-      // 스택에 다 쌓이고 나서 실행
-      console.log(L);
+      for (let i = 0; i < n; i++) {
+        if (ch[i] === 0) {
+          ch[i] = 1;
+          tmp[depth] = arr[i];
+          DFS(depth + 1);
+          ch[i] = 0;
+        }
+      }
     }
   }
 
-  DFS(n);
+  DFS(0);
+  return answer;
 }
 
-console.log(solution(3));
+let arr = [3, 6, 9];
+console.log(solution(2, arr));
