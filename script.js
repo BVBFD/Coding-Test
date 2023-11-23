@@ -1,27 +1,15 @@
-function solution(n) {
-  let answer = [];
-  const ch = Array.from({ length: n + 1 }, () => 0);
+function solution(n, r) {
+  let answer;
+  let dy = Array.from(Array(35), () => Array(35).fill(0));
 
-  function DFS(depth) {
-    if (depth === n + 1) {
-      let tmp = '';
-      for (let i = 1; i <= n + 1; i++) {
-        if (ch[i] === 1) tmp += i + ' ';
-      }
-      if (tmp.length > 0) answer.push(tmp.trim());
-    } else {
-      ch[depth] = 1;
-      // 먼저 첫번쨰 DFS에서 끝까지 가지가 뻗고,
-      DFS(depth + 1);
-      // 가지를 끝까지 뻗었으면 그 전으로 다시 빽해서
-      ch[depth] = 0;
-      // 다른 쪽으로 또 가지를 뻗는다.
-      DFS(depth + 1);
-    }
+  function DFS(n, r) {
+    if (dy[n][r] > 0) return dy[n][r];
+    if (n === r || r === 0) return 1;
+    else return (dy[n][r] = DFS(n - 1, r - 1) + DFS(n - 1, r));
   }
 
-  DFS(1);
+  answer = DFS(n, r);
   return answer;
 }
 
-console.log(solution(3));
+console.log(solution(33, 19));
